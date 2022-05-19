@@ -1,11 +1,12 @@
 """
-This module is an example of a barebones numpy reader plugin for napari.
+This module is SAiryscan reader plugin for napari.
 
 It implements the Reader specification, but your plugin may choose to
 implement multiple readers or even other plugin contributions. see:
 https://napari.org/plugins/guides.html?#readers
 """
 import numpy as np
+from sairyscan.core import SAiryscanReader
 
 
 def napari_get_reader(path):
@@ -29,7 +30,7 @@ def napari_get_reader(path):
         path = path[0]
 
     # if we know we cannot read the file, we immediately return None.
-    if not path.endswith(".npy"):
+    if not path.endswith(".czi"):
         return None
 
     # otherwise we return the *function* that can read ``path``.
@@ -61,7 +62,10 @@ def reader_function(path):
     # handle both a string and a list of strings
     paths = [path] if isinstance(path, str) else path
     # load all files into array
-    arrays = [np.load(_path) for _path in paths]
+    arrays = []
+    for _path in paths:
+        reader = SAiryscanReader(_path)
+        arrays.append(reader.data())
     # stack arrays into single array
     data = np.squeeze(np.stack(arrays))
 

@@ -8,9 +8,9 @@ Replace code below according to your needs.
 """
 from __future__ import annotations
 
-import numpy
+from sairyscan.data import celegans
 
 
 def make_sample_data():
-    """Generates an image"""
-    return numpy.random.rand(512, 512)
+    """load SAiryscan data"""
+    return [(celegans().detach().numpy(), {"name": "C. elegans"})]
