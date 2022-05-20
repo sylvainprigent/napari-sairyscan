@@ -1,7 +1,7 @@
 from qtpy.QtWidgets import QWidget, QLabel, QGridLayout, QLineEdit
 
 
-class SDictGui(QWidget):
+class SDictWidget(QWidget):
     """Create a parameters widget from a dictionary
 
     Parameters
@@ -11,20 +11,26 @@ class SDictGui(QWidget):
 
     """
     def __init__(self, params):
+        super().__init__()
+        self.metadata = params
         self.params = {}
         self.layout = QGridLayout()
+        self.layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout)
-        self.line_idx = 0
-        for key, value in params.items():
+        self._line_idx = 0
+        print('params=', params)
+        for key, value in params['parameters'].items():
             # todo: add different widget depending on 'type'
             self.add_line_edit(key, value)
 
     def add_line_edit(self, key, value):
-        self.layout.addWidget(QLabel(value['label']), self.line_idx, 0)
-        self.line_idx += 1
+        print('line idx = ', self._line_idx)
+        print('label:', value)
+        self.layout.addWidget(QLabel(value['label']), self._line_idx, 0)
+        self._line_idx += 1
         line_edit = QLineEdit()
-        line_edit.setText(value['default'])
-        self.layout.addWidget(line_edit, self.line_idx, 1)
+        line_edit.setText(str(value['default']))
+        self.layout.addWidget(line_edit, self._line_idx, 1)
         self.params[key] = {
                             'type': value['type'],
                             'label': value['label'],

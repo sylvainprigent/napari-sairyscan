@@ -9,7 +9,7 @@ Replace code below according to your needs.
 import napari
 from qtpy.QtWidgets import QGridLayout, QVBoxLayout, QPushButton, QWidget, QLabel, QComboBox, QProgressBar
 
-from sairyscan.api import SAiryscanAPI
+from ._pipelines import SPipelineISM
 
 
 class SAiryscanWidget(QWidget):
@@ -48,12 +48,16 @@ class SAiryscanWidget(QWidget):
 
         # Progress bar
         self.progress_bar = QProgressBar()
+        self.progress_bar.setValue(42)
         self.layout().addWidget(self.progress_bar, 4, 0, 1, 2)
         self.layout().addWidget(QWidget(), 5, 0, 1, 2)
 
         # load the pipelines
-        api = SAiryscanAPI()
-        for pipeline in api.pipelines
+        self.add_pipeline(SPipelineISM())
+
+    def add_pipeline(self, pipeline_widget):
+        self.parameters_layout.addWidget(pipeline_widget)
+        self.method_box.addItem(pipeline_widget.label)
 
     def _on_layer_change(self, e):
         """Update the plugin layers lists when napari layers are updated
@@ -77,4 +81,4 @@ class SAiryscanWidget(QWidget):
         print("napari has", len(self.viewer.layers), "layers")
 
     def _on_change_method(self, method_name):
-        print("Curent method is ", method_name, " for layer:", len(self.viewer.layers))
+        print("Current method is ", method_name, " for layer:", len(self.viewer.layers))
