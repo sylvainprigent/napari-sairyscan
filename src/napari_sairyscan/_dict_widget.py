@@ -1,4 +1,5 @@
 from qtpy.QtWidgets import QWidget, QLabel, QGridLayout, QLineEdit, QGroupBox, QComboBox
+from ._psf_widget import SPsfWidget
 
 
 class SEpsilonWidget(QWidget):
@@ -66,6 +67,8 @@ class SDictWidget(QGroupBox):
             # todo: add different widget depending on 'type'
             if key == 'epsilon':
                 self.add_epsilon_edit(key, value)
+            elif key == 'psf':
+                self.add_psf_widget(key, value)
             elif value['type'] == 'select':
                 self.add_select_edit(key, value)
             else:
@@ -73,6 +76,19 @@ class SDictWidget(QGroupBox):
         # hide empty widget
         if len(params['parameters']) == 0:
             self.setFixedHeight(0)
+
+    def add_psf_widget(self, key, value):
+        psf_widget = SPsfWidget()
+        self.layout.addWidget(psf_widget, self._line_idx, 0, 1, 2)
+        self._line_idx += 1
+        self.params[key] = {
+            'type': value['type'],
+            'label': value['label'],
+            'help': value['help'],
+            'default': value['default'],
+            'range': None,
+            'widget': psf_widget
+        }
 
     def add_select_edit(self, key, value):
         print('add select with dict=', value)
@@ -94,6 +110,7 @@ class SDictWidget(QGroupBox):
     def add_epsilon_edit(self, key, value):
         epsilon_widget = SEpsilonWidget()
         self.layout.addWidget(epsilon_widget, self._line_idx, 0, 1, 2)
+        self._line_idx += 1
         self.params[key] = {
                             'type': value['type'],
                             'label': value['label'],
@@ -139,7 +156,9 @@ class SDictWidget(QGroupBox):
         for key, value in self.params.items():
             if key == 'epsilon':
                 params[key] = value['widget'].state()['epsilon']
-            if isinstance(value['widget'], QComboBox):
+            elif key == 'psf':
+                params[key] = value['widget'].state()['psf']
+            elif isinstance(value['widget'], QComboBox):
                 params[key] = value['widget'].currentText()
             else:
                 params[key] = value['widget'].text()
