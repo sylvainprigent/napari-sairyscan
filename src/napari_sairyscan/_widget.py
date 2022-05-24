@@ -15,6 +15,7 @@ from ._ism import SWidgetISM, SWorkerISM
 from ._ifed import SWidgetIFED, SWorkerIFED
 from ._isfed import SWidgetISFED, SWorkerISFED
 from ._pseudo_confocal import SWidgetConfocal, SWorkerConfocal
+from ._spitfire_join_deconv import SWidgetSpitfireJoinDeconv, SWorkerSpitfireJoinDeconv
 
 
 class SAiryscanWorker(QObject):
@@ -104,6 +105,11 @@ class SAiryscanWidget(QWidget):
         isfed_widget = SWidgetISFED()
         isfed_worker = SWorkerISFED(self.viewer, isfed_widget, self._observer)
         self.add_pipeline('ISFED', isfed_widget, isfed_worker)
+
+        spitfire_join_deconv_widget = SWidgetSpitfireJoinDeconv()
+        spitfire_join_deconv_worker = SWorkerSpitfireJoinDeconv(self.viewer, spitfire_join_deconv_widget,
+                                                                self._observer)
+        self.add_pipeline('Spitfire Join Deconv', spitfire_join_deconv_widget, spitfire_join_deconv_worker)
 
         # init the view
         self._on_change_method(self.method_box.currentText())

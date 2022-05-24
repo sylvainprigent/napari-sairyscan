@@ -26,6 +26,8 @@ class SEnhancingWidget(QGroupBox):
         layout.addWidget(self.parameters_widgets, 1, 0, 1, 2)
 
         # add all the items
+        self.enhancing_box.addItem('None', 'None')
+        self.parameters_layout.addWidget(SDictWidget({'label': 'None', 'parameters': {}}))
         for meta in metadata:
             self.enhancing_box.addItem(meta['label'], meta['name'])
             widget = SDictWidget(meta)

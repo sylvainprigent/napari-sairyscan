@@ -64,7 +64,6 @@ class SDictWidget(QGroupBox):
         self.setLayout(self.layout)
         self._line_idx = 0
         for key, value in params['parameters'].items():
-            # todo: add different widget depending on 'type'
             if key == 'epsilon':
                 self.add_epsilon_edit(key, value)
             elif key == 'psf':
