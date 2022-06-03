@@ -1,26 +1,23 @@
-
-
-<!-- This file is designed to provide you with a starting template for documenting
-the functionality of your plugin. Its content will be rendered on your plugin's
-napari hub page.
-
-The sections below are given as a guide for the flow of information only, and
-are in no way prescriptive. You should feel free to merge, remove, add and
-rename sections at will to make this document work best for your plugin.
+This plugin implements various methods to reconstruct high resolution images for the Airyscan 
+microscope raw data 
 
 ## Description
 
-This should be a detailed description of the context of your plugin and its
-intended purpose.
+Airyscan raw images are confocal images obtained from 32 sub-detectors. Several methods can be used
+to reconstruct a high resolution image from these 32 sub-detectors images. This plugin implements
+the following methods:
+- Pseudo-confocal: creates a pseudo confocal image by summing 7, 19 or 19 detectors
+- ISM: creates a higher resolution image by summing the images from the 32 sub-detectors after 
+co-registering all the images to the central detector. A deconvolution algorithm can be applied in 
+post-processing to gain more resolution
+- IFED: reconstructs a high resolution image by subtracting the outer ring detector to the central 
+detector. This method can be interpreted as a 'virtual STED'
+- ISFED: reconstructs a high resolution image by combining the co-registered detectors images and the
+raw detectors images     
+- Join deconvolution: reconstructs a high resolution image by jointly deblurring all 32 detectors 
+with a variational approach.
 
-If you have videos or screenshots of your plugin in action, you should include them
-here as well, to make them front and center for new users.
-
-You should use absolute links to these assets, so that we can easily display them
-on the hub. The easiest way to include a video is to use a GIF, for example hosted
-on imgur. You can then reference this GIF as an image.
-
-![Example GIF hosted on Imgur](https://i.imgur.com/A5phCX4.gif)
+![Example image](https://i.imgur.com/A5phCX4.gif)
 
 Note that GIFs larger than 5MB won't be rendered by GitHub - we will however,
 render them on the napari hub.
@@ -87,6 +84,4 @@ here.
 
 Many plugins may be used in the course of published (or publishable) research, as well as
 during conference talks and other public facing events. If you'd like to be cited in
-a particular format, or have a DOI you'd like used, you should provide that information here. -->
-
-The developer has not yet provided a napari-hub specific description.
+a particular format, or have a DOI you'd like used, you should provide that information here. 
