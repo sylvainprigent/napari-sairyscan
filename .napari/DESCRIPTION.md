@@ -29,26 +29,39 @@ can also be stored in any format that napari can open.
 
 - Open the sample image from the menu *File > Open samples > napari-sairyscan > SAiryscan*
 
-![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/screenshot.png)
-![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/screenshot.png)
+![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/open_sample.png)
+![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/samples.png)
 
 
 - Open the SAiryscan plugin from the menu *Plugins > napari-sairyscan: Airyscan reconstruction*
 
-![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/screenshot.png)
-![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/screenshot.png)
+![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/open_plugin.png)
+![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/join_deconv_plugin.png)
 
+- We select the `join deconvolution` method and run it with the default parameters. Default parameters
+are optimized for the sample image:
+
+![Open image](https://raw.githubusercontent.com/sylvainprigent/napari-sairyscan/main/docs/images/join_deconv_result.png)
 
 
 ## Getting Help
 
-This section should point users to your preferred support tools, whether this be raising
-an issue on GitHub, asking a question on image.sc, or using some other method of contact.
-If you distinguish between usage support and bug/feature support, you should state that
-here.
+For any bug report or feature request please [file an issue]
 
 ## How to Cite
 
-Many plugins may be used in the course of published (or publishable) research, as well as
-during conference talks and other public facing events. If you'd like to be cited in
-a particular format, or have a DOI you'd like used, you should provide that information here. 
+If you use this plugin please cite the [paper](https://ieeexplore.ieee.org/document/9054640):
+    
+    @INPROCEEDINGS{9054640,
+    author={Prigent, Sylvain and Dutertre, Stephanie and Kervrann, Charles},
+    booktitle={ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+    title={Empirical Sure-Guided Microscopy Super-Resolution Image Reconstruction from Confocal Multi-Array Detectors}, 
+    year={2020},
+    volume={},
+    number={},
+    pages={1075-1079},
+    doi={10.1109/ICASSP40776.2020.9054640}}
+
+
+
+[file an issue]: https://github.com/sylvainprigent/napari-sairyscan/issues
