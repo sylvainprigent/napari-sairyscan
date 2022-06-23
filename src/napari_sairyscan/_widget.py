@@ -13,7 +13,9 @@ from qtpy.QtCore import QThread, Signal, QObject
 from ._splugin import SProgressObserver
 from ._ism import SWidgetISM, SWorkerISM
 from ._ifed import SWidgetIFED, SWorkerIFED
+from ._ifed_denoising import SWidgetIFEDDenoising, SWorkerIFEDDenoising
 from ._isfed import SWidgetISFED, SWorkerISFED
+from ._isfed_denoising import SWidgetISFEDDenoising, SWorkerISFEDDenoising
 from ._pseudo_confocal import SWidgetConfocal, SWorkerConfocal
 from ._spitfire_join_deconv import SWidgetSpitfireJoinDeconv, SWorkerSpitfireJoinDeconv
 
@@ -102,9 +104,17 @@ class SAiryscanWidget(QWidget):
         ifed_worker = SWorkerIFED(self.viewer, ifed_widget, self._observer)
         self.add_pipeline('IFED', ifed_widget, ifed_worker)
 
+        ifed_den_widget = SWidgetIFEDDenoising()
+        ifed_den_worker = SWorkerIFEDDenoising(self.viewer, ifed_den_widget, self._observer)
+        self.add_pipeline('IFED Denoising', ifed_den_widget, ifed_den_worker)
+
         isfed_widget = SWidgetISFED()
         isfed_worker = SWorkerISFED(self.viewer, isfed_widget, self._observer)
         self.add_pipeline('ISFED', isfed_widget, isfed_worker)
+
+        isfed_den_widget = SWidgetISFEDDenoising()
+        isfed_den_worker = SWorkerISFEDDenoising(self.viewer, isfed_den_widget, self._observer)
+        self.add_pipeline('ISFED Denoising', isfed_den_widget, isfed_den_worker)
 
         spitfire_join_deconv_widget = SWidgetSpitfireJoinDeconv()
         spitfire_join_deconv_worker = SWorkerSpitfireJoinDeconv(self.viewer, spitfire_join_deconv_widget,
